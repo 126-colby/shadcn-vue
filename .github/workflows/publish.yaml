@@ -68,7 +68,7 @@ jobs:
           projectName: shadcn-vue
           directory: .vitepress/dist
           # Optional: Enable this if you want to have GitHub Deployments triggered
-          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          gitHubToken: ${{ secrets.GH_TOKEN }}
           # Optional: Switch what branch you are publishing to.
           # By default this will be the branch which triggered this workflow
           branch: ${{ github.ref == 'refs/heads/dev' && 'dev' || format('refs/pull/{0}/merge', github.event.number) }}
@@ -80,7 +80,7 @@ jobs:
         if: ${{ github.event_name == 'pull_request_target' && contains(github.event.label.name, '🚀request-deploy') }}
         uses: actions/github-script@v6
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.GH_TOKEN }}
           script: |
             github.rest.issues.removeLabel({
               issue_number: context.issue.number,
